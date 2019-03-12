@@ -3,10 +3,16 @@ HomerGantt
 
 Gantt chart providing status transparency to various stakeholders
 
-"urls.py": /homergantt/config/urls.py
-"views.py": /homergantt/project_manager/views.py
-"models.py": /homergantt/project_manager/models.py
-"templates": /homergantt/project_manager/templates/pages/
+Relevant filepaths:
+^^^^^^^^^^^^^^^^^^^
+
+* "urls.py": /homergantt/config/urls.py
+
+* "views.py": /homergantt/project_manager/views.py
+
+* "models.py": /homergantt/project_manager/models.py
+
+* "templates": /homergantt/project_manager/templates/pages/
 
 
 
