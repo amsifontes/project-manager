@@ -1,3 +1,8 @@
+### Custom to Homer
+Pipfile
+Pipfile.lock
+.vscode/
+
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -24,8 +29,6 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-Pipfile
-Pipfile.lock
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
