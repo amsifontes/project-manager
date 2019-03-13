@@ -3,6 +3,20 @@ HomerGantt
 
 Gantt chart providing status transparency to various stakeholders
 
+Relevant filepaths:
+^^^^^^^^^^^^^^^^^^^
+
+* "urls.py": /homergantt/config/urls.py
+
+* "views.py": /homergantt/project_manager/views.py
+
+* "models.py": /homergantt/project_manager/models.py
+
+* "templates": /homergantt/project_manager/templates/pages/
+
+
+
+
 .. image:: https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg
      :target: https://github.com/pydanny/cookiecutter-django/
      :alt: Built with Cookiecutter Django
@@ -80,7 +94,3 @@ Heroku
 See detailed `cookiecutter-django Heroku documentation`_.
 
 .. _`cookiecutter-django Heroku documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-on-heroku.html
-
-
-
-
