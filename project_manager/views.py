@@ -44,7 +44,11 @@ def hello(request):
         proj_dict["start_date"] = project.start_date
         proj_dict["end_date"] = project.end_date
         proj_dict["phases"] = [phase for phase in phases]
-        project_list.append(project_dict)
+        project_list.append(proj_dict)
+
+        context = {
+            'projects_list': project_list
+        }
     
 
 
