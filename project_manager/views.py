@@ -71,7 +71,7 @@ def hello(request):
     #
 
     context = {
-        'projects': projects,
-        'phases': phases,
+        # 'projects': projects,
+        # 'phases': phases,
     }
     return render(request, 'pages/hello.html', context)
