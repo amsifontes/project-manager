@@ -6,12 +6,14 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
 from project_manager import views as project_manager_views
+# hello, create_project, update_project, create_phase, update_phase
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-
-    path("hey/", project_manager_views.hello ),
     # path('', views.homepage, name="home"),
+    
+    path("hey/", project_manager_views.hello ),
+    path("create-project/", project_manager_views.create_project),
 
     path(
         "about/",
