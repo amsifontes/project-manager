@@ -60,7 +60,7 @@ class Project(models.Model):
 
 class Phase(models.Model):
     # id(pk)
-    project_id = models.ForeignKey(
+    project = models.ForeignKey(
         Project,
         related_name='phases',
         on_delete=models.CASCADE,
@@ -77,11 +77,11 @@ class Phase(models.Model):
 
 class Task(models.Model):
     # id(pk)
-    project_id = models.ForeignKey(
+    project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
     )
-    phase_id = models.ForeignKey(
+    phase = models.ForeignKey(
         Phase,
         on_delete=models.CASCADE,
     )

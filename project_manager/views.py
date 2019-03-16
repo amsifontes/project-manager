@@ -7,8 +7,8 @@ from .models import Project, Phase
 
 def hello(request):
     # users = User.objects.all()
-    print(Project.objects.all()[1])
-    print(Phase.objects.all()[1])
+    # print(Project.objects.all()[1])
+    # print(Phase.objects.all()[1])
     # print(request)
     
 
@@ -52,9 +52,9 @@ def hello(request):
     
 
 
-        print('project:', project)
+        # print('project:', project)
         # print('all phases:' project.phases.all())
-        print(project_list)
+    print('projects list:', project_list)
         # context["project_name"] = project.name
         # context["address"] = project.address
         
