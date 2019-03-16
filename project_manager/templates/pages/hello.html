@@ -15,7 +15,15 @@
   <h3>{{ project.name_proj }}</h3>
   <ul>
   {% for phase in phases %}
+    <!-- {% if phase.project_id == project.id %} -->
     <li>{{phase.name_phase}} - Start Date: {{ phase.start_date }}  End Date: {{ phase.end_date }}</li>
+    <!-- {% endif %} -->
   {% endfor %}
   </ul>
 {% endfor %}
+
+
+<!-- 
+{% if somevar == "x" %}
+  This appears if variable somevar equals the string "x"
+{% endif %} -->

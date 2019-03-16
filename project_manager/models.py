@@ -55,13 +55,14 @@ class Project(models.Model):
     end_date = models.DateField()
 
     # def __str__(self):
-    #     return self.name
+    #     return self.name_proj
 
 
 class Phase(models.Model):
     # id(pk)
     project_id = models.ForeignKey(
         Project,
+        related_name='phases',
         on_delete=models.CASCADE,
     )
     name_phase = models.CharField(
