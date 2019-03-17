@@ -14,6 +14,7 @@ urlpatterns = [
     
     path("hey/", project_manager_views.hello ),
     path("create-project/", project_manager_views.create_project),
+    path("update-project/<project_id>", project_manager_views.update_project),
 
     path(
         "about/",

@@ -89,19 +89,63 @@ def create_project(request):
                 start_date = form.cleaned_data['start_date'],
                 end_date = form.cleaned_data['end_date'],
             )
-            messages.info(request, "New Project Created")
+            # messages.info(request, "New Project Created")
             return redirect('/hey/')
+
     else:
         form = ProjectForm()
     
     context = {
         'form': form,
+        # 'mesages': messages,
     }
     # TODO: create html file create-project.html
     return render(request, 'pages/create-project.html', context)
 
 
-def update_project(request):
+def update_project(request, project_id):
+    # form = ProjectForm(request.POST)
+    project = Project.objects.get(id=project_id)
+    form = ProjectForm(initial={
+        'architect': project.architect,
+        'client': project.client,
+        'name_proj': project.name_proj,
+        'address': project.address,
+        'start_date': project.start_date,
+        'end_date': project.end_date,
+    })
+#     form = MyForm(initial={'charfield1': 'foo', 'charfield2': 'bar'})
+
+#     >>> from django import forms
+# >>> class CommentForm(forms.Form):
+# ...     name = forms.CharField(initial='class')
+# ...     url = forms.URLField()
+# ...     comment = forms.CharField()
+# >>> f = CommentForm(initial={'name': 'instance'}, auto_id=False)
+# >>> print(f)
+    # read (CRUD)
+    
+
+    if 'project' in request.POST:
+        # update (CRUD)
+        project.architect = request.POST['architect']
+        project.client = request.POST['client']
+        project.name_proj = request.POST['name_proj']
+        project.address = request.POST['address']
+        project.start_date = request.POST['start_date']
+        project.end_date = request.POST['end_date']
+
+
+
+        project.save()
+        return redirect('/hey/')
+
+    context = {
+        'project': project,
+        'form': form
+    }
+    return render(request, 'pages/update-project.html', context)
+
     pass
 
 def create_phase(request):
