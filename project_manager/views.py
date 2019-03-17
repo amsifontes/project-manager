@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+# from django.contrib.auth.models import User
 from django import forms
 
 from .models import Architect, Client, Project, Phase
 
 architects = Architect.objects.all()
-print(architects)
+# print(architects)
 architect_choices_list = []
 for architect in architects:
     architect_option = (architect, architect.username)
@@ -25,7 +27,7 @@ client_choices_tuple = tuple(client_choices_list)
 
 #forms as classes
 class ProjectForm(forms.Form):
-    architect_username = forms.ChoiceField(
+    architect = forms.ChoiceField(
         required=True,
         widget=forms.RadioSelect, 
         choices=architect_choices_tuple,
@@ -39,36 +41,6 @@ class ProjectForm(forms.Form):
     address  = forms.CharField(max_length=100)
     start_date  = forms.DateField(widget=forms.SelectDateWidget)
     end_date  = forms.DateField(widget=forms.SelectDateWidget)
-    
-
-
-# >>> CHOICES = (('1', 'First',), ('2', 'Second',))
-# >>> choice_field = forms.ChoiceField(widget=forms.RadioSelect, choices=CHOICES)
-# >>> choice_field.choices
-# [('1', 'First'), ('2', 'Second')]
-# >>> choice_field.widget.choices
-# [('1', 'First'), ('2', 'Second')]
-# >>> choice_field.widget.choices = ()
-# >>> choice_field.choices = (('1', 'First and only',),)
-# >>> choice_field.widget.choices
-# [('1', 'First and only')]
-
-
-# BIRTH_YEAR_CHOICES = ('1980', '1981', '1982')
-# FAVORITE_COLORS_CHOICES = (
-#     ('blue', 'Blue'),
-#     ('green', 'Green'),
-#     ('black', 'Black'),
-# )
-
-
-# class SimpleForm(forms.Form):
-#     birth_year = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
-#     favorite_colors = forms.MultipleChoiceField(
-#         required=False,
-#         widget=forms.CheckboxSelectMultiple,
-#         choices=FAVORITE_COLORS_CHOICES,
-#     )
 
 # Create your views here.
 # def retrieve_project_id():
@@ -104,15 +76,20 @@ def create_project(request):
 
 
         if form.is_valid():
+            print("form.cleaned_data['architect']: ", form.cleaned_data['architect'])
             Project.objects.create(
-                architect_username = form.cleaned_data['architect_username'],
-                client = form.cleaned_data['client'],
+                # architect_username = form.cleaned_data['architect_username'],
+                # architect = form.cleaned_data['architect'],
+                architect = Architect.objects.get(username=form.cleaned_data['architect']),
+
+                # client = form.cleaned_data['client'],
+                client = Client.objects.get(username=form.cleaned_data['client']),
                 name_proj = form.cleaned_data['name_proj'],
                 address = form.cleaned_data['address'],
                 start_date = form.cleaned_data['start_date'],
                 end_date = form.cleaned_data['end_date'],
             )
-            messages.warning(request, "New Project Created")
+            messages.info(request, "New Project Created")
             return redirect('/hey/')
     else:
         form = ProjectForm()

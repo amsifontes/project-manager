@@ -8,7 +8,7 @@ class Architect(models.Model):
         max_length=100,
         # unique=True,
     )
-    # fist_name
+    # first_name
     # last_name
     email = models.EmailField(
         max_length=100,
@@ -36,7 +36,7 @@ class Client(models.Model):
 
 class Project(models.Model):
     # id(pk)
-    architect_username = models.ForeignKey(
+    architect = models.ForeignKey(
         Architect,
         on_delete=models.CASCADE,
         # default="unassigned"
