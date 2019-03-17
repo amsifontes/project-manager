@@ -11,6 +11,13 @@ for architect in architects:
     architect_choices_list.append(architect_option)
 architect_choices_tuple = tuple(architect_choices_list)
 
+clients = Client.objects.all()
+client_choices_list = []
+for client in clients:
+    client_option = (client, client.username)
+    client_choices_list.append(client_option)
+client_choices_tuple = tuple(client_choices_list)
+
 # (
 #     ('1', 'Architect option 1'),
 #     ('2', 'Architect option 2'),
@@ -23,7 +30,11 @@ class ProjectForm(forms.Form):
         widget=forms.RadioSelect, 
         choices=architect_choices_tuple,
         )
-    client  = forms.CharField(max_length=100)
+    client  = forms.ChoiceField(
+        required=True,
+        widget=forms.RadioSelect, 
+        choices=client_choices_tuple,
+        )
     name_proj  = forms.CharField(max_length=100)
     address  = forms.CharField(max_length=100)
     start_date  = forms.DateField(widget=forms.SelectDateWidget)
