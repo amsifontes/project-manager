@@ -104,36 +104,41 @@ def create_project(request):
 
 
 def update_project(request, project_id):
-    # form = ProjectForm(request.POST)
     project = Project.objects.get(id=project_id)
-    form = ProjectForm(initial={
-        'architect': project.architect,
-        'client': project.client,
-        'name_proj': project.name_proj,
-        'address': project.address,
-        'start_date': project.start_date,
-        'end_date': project.end_date,
-    })
-#     form = MyForm(initial={'charfield1': 'foo', 'charfield2': 'bar'})
 
-#     >>> from django import forms
-# >>> class CommentForm(forms.Form):
-# ...     name = forms.CharField(initial='class')
-# ...     url = forms.URLField()
-# ...     comment = forms.CharField()
-# >>> f = CommentForm(initial={'name': 'instance'}, auto_id=False)
-# >>> print(f)
+    form = ProjectForm(
+          initial={
+              'architect': project.architect,
+              'client': project.client, 
+              'name_proj': project.name_proj,
+              'address': project.address,
+              'start_date': project.start_date,
+              'end_date': project.end_date,
+          }
+     )
     # read (CRUD)
-    
-
+    print('120:',request.POST)
+    # not certain of the purpose of this if statement
     if 'project' in request.POST:
+        print('123:',request.POST)
         # update (CRUD)
+        # should these be changed to = form.cleaned_data['architect'] ?
         project.architect = request.POST['architect']
         project.client = request.POST['client']
         project.name_proj = request.POST['name_proj']
         project.address = request.POST['address']
         project.start_date = request.POST['start_date']
         project.end_date = request.POST['end_date']
+
+
+        # project.architect = Architect.objects.get(username=form.cleaned_data['architect'])
+        # project.client = Client.objects.get(username=form.cleaned_data['client'])
+        # project.name_proj = form.cleaned_data['name_proj']
+        # project.address = form.cleaned_data['address']
+        # project.start_date = form.cleaned_data['start_date']
+        # project.end_date = form.cleaned_data['end_date']
+
+        
 
 
 
