@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Page - Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+        <div class="col">
+          <p>work in progress</p>
+          <h1>Projects</h1>
+          {% for project in projects %}
+            <h2>Name of project: {{ project.name_proj }}</h2>
+            <h3>Address: {{ project.address }}</h3>
+            <h3>Start Date: {{ project.start_date }}</h3>
+            <h3>End Date: {{ project.end_date }}</h3>
+            <h3>Client: {{ project.client }}</h3>
+          {% endfor %}
+        </div>
+        <div class="col">
+          <h1>Phases</h1>
+          {% for phase in phases %}
+            <h2>Name of phase: {{ phase.name_phase }}</h2>
+            <h3>Project: {{ phase.project }}</h3>
+            <h3>Start Date: {{ phase.start_date }}</h3>
+            <h3>End Date: {{ phase.end_date }}</h3>
+            <h3>Client: {{ phase.client }}</h3
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+              

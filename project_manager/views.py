@@ -62,7 +62,7 @@ def render_projects(request):
         'projects_list': project_list
     }
     # print('projects list:', project_list)
-    return render(request, 'pages/hello.html', context)
+    return render(request, 'pages/base-all-projects.html', context)
 
 def create_project(request):
     # process form data if POST request
