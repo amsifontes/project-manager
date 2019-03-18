@@ -42,12 +42,11 @@ class ProjectForm(forms.Form):
     start_date  = forms.DateField(widget=forms.SelectDateWidget)
     end_date  = forms.DateField(widget=forms.SelectDateWidget)
 
-# Create your views here.
-# def retrieve_project_id():
 
 
 # main project view - render all projects and related phases
-def hello(request):
+# can be re-used/refactored to render only related projects/phases
+def render_projects(request):
     projects = Project.objects.all()
     project_list = []
     for project in projects:
@@ -70,18 +69,13 @@ def create_project(request):
     if request.method == 'POST':
         # create form instance
         form = ProjectForm(request.POST)
-        # confirm form values are valid
-
         # TODO: validate address with LOB API HERE
-
-
+        # confirm form values are valid
         if form.is_valid():
             print("form.cleaned_data['architect']: ", form.cleaned_data['architect'])
             Project.objects.create(
-                # architect_username = form.cleaned_data['architect_username'],
                 # architect = form.cleaned_data['architect'],
                 architect = Architect.objects.get(username=form.cleaned_data['architect']),
-
                 # client = form.cleaned_data['client'],
                 client = Client.objects.get(username=form.cleaned_data['client']),
                 name_proj = form.cleaned_data['name_proj'],
@@ -89,20 +83,58 @@ def create_project(request):
                 start_date = form.cleaned_data['start_date'],
                 end_date = form.cleaned_data['end_date'],
             )
-            messages.info(request, "New Project Created")
-            return redirect('/hey/')
+            # messages.info(request, "New Project Created")
+            return redirect('/projects/')
+
     else:
         form = ProjectForm()
     
     context = {
         'form': form,
+        # 'mesages': messages,
     }
-    # TODO: create html file create-project.html
     return render(request, 'pages/create-project.html', context)
 
 
-def update_project(request):
-    pass
+def update_project(request, project_id):
+    # Read in project based on url-parsed value
+    project = Project.objects.get(id=project_id)
+
+    # if request is POST, validate for data and overwrite to db
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            print('form is valid')
+            print(form.cleaned_data)
+            project.architect = Architect.objects.get(username=form.cleaned_data['architect'])
+            project.client = Client.objects.get(username=form.cleaned_data['client'])
+            project.name_proj = form.cleaned_data['name_proj']
+            project.address = form.cleaned_data['address']
+            project.start_date = form.cleaned_data['start_date']
+            project.end_date = form.cleaned_data['end_date']
+            project.save()
+            return redirect('/projects/')
+        else:
+            print('form not valid')
+    else:
+        # if not POST request, load data with initial values for project selected with url-parsed value
+        form = ProjectForm(
+            initial={
+                'architect': project.architect,
+                'client': project.client, 
+                'name_proj': project.name_proj,
+                'address': project.address,
+                'start_date': project.start_date,
+                'end_date': project.end_date,
+            }
+        )
+
+    context = {
+        'project': project,
+        'form': form
+    }
+    return render(request, 'pages/update-project.html', context)
+
 
 def create_phase(request):
     pass

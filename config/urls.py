@@ -12,8 +12,9 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     # path('', views.homepage, name="home"),
     
-    path("hey/", project_manager_views.hello ),
+    path("projects/", project_manager_views.render_projects),
     path("create-project/", project_manager_views.create_project),
+    path("update-project/<project_id>", project_manager_views.update_project),
 
     path(
         "about/",

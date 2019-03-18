@@ -1,5 +1,8 @@
 from django.db import models
 
+
+# TODO: add `created` and `updated` fields to models
+
 # USER MODELS
 
 class Architect(models.Model):
