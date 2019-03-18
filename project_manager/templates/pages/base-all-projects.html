@@ -10,25 +10,30 @@
   <div class="container">
     <div class="row">
         <div class="col">
-          <p>work in progress</p>
           <h1>Projects</h1>
-          {% for project in projects %}
-            <h2>Name of project: {{ project.name_proj }}</h2>
-            <h3>Address: {{ project.address }}</h3>
-            <h3>Start Date: {{ project.start_date }}</h3>
-            <h3>End Date: {{ project.end_date }}</h3>
-            <h3>Client: {{ project.client }}</h3>
+          <ol>
+          {% for project in projects_list %}
+            <li>
+            <h2>Name of project: <em>{{ project.project_name }}</em></h2>
+            <address>Address: <em>{{ project.address }}</em></address>
+            <p>Start Date: <em>{{ project.start_date }}</em></p>
+            <p>End Date: <em>{{ project.end_date }}</em></p>
+            <p>Client: <em>{{ project.client }}</em></p>
+            <h2>Phases:</h2>
+            <ol>
+            {% for phase in project.phases %}
+              <li>
+              <p>Name of phase: <em>{{ phase.name_phase }}</em></p>
+              <p>Project: <em>{{ phase.project }}</em></p>
+              <p>Start Date: <em>{{ phase.start_date }}</em></p>
+              <p>End Date: <em>{{ phase.end_date }}</em></p>
+              <p>Client: <em>{{ phase.client }}</em></p
+              </li>
+            {% endfor %}
+            </ol>
+            </li>
           {% endfor %}
-        </div>
-        <div class="col">
-          <h1>Phases</h1>
-          {% for phase in phases %}
-            <h2>Name of phase: {{ phase.name_phase }}</h2>
-            <h3>Project: {{ phase.project }}</h3>
-            <h3>Start Date: {{ phase.start_date }}</h3>
-            <h3>End Date: {{ phase.end_date }}</h3>
-            <h3>Client: {{ phase.client }}</h3
-          {% endfor %}
+          </ol>
         </div>
       </div>
     </div>
