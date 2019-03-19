@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Page - Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+        <div class="col">
+          <h1>Projects</h1>
+          <ol>
+          {% for project in projects_list %}
+            <li>
+            <h2>Name of project: <em>{{ project.project_name }}</em></h2>
+            <address>Address: <em>{{ project.address }}</em></address>
+            <p>Start Date: <em>{{ project.start_date }}</em></p>
+            <p>End Date: <em>{{ project.end_date }}</em></p>
+            <p>Client: <em>{{ project.client }}</em></p>
+            <h2>Phases:</h2>
+            <ol>
+            {% for phase in project.phases %}
+              <li>
+              <p>Name of phase: <em>{{ phase.name_phase }}</em></p>
+              <p>Project: <em>{{ phase.project }}</em></p>
+              <p>Start Date: <em>{{ phase.start_date }}</em></p>
+              <p>End Date: <em>{{ phase.end_date }}</em></p>
+              <p>Client: <em>{{ phase.client }}</em></p
+              </li>
+            {% endfor %}
+            </ol>
+            </li>
+          {% endfor %}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+              
