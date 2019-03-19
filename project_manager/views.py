@@ -64,7 +64,7 @@ def render_projects(request):
     # print('projects list:', project_list)
     return render(request, 'pages/hello.html', context)
 
-def client_projects(request, client_id):
+def client_projects(request, client_id): # WORK IN PROGRESS
     # projects = Project.client.filter(pk=client_id)
     # SELECT 
     #     *
