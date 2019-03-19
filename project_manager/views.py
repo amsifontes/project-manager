@@ -48,7 +48,6 @@ class ProjectForm(forms.Form):
 # can be re-used/refactored to render only related projects/phases
 def render_projects(request):
     projects = Project.objects.all()
-    phases = Phase.objects.all()
     project_list = []
     for project in projects:
         proj_dict = dict()
@@ -57,11 +56,10 @@ def render_projects(request):
         proj_dict["start_date"] = project.start_date
         proj_dict["end_date"] = project.end_date
         proj_dict["client"] = project.client_id
-        proj_dict["phases"] = []
-        for phase in phases:
-            if project.id == phase.project_id:
-                project_list.append(proj_dict)
+        proj_dict["phases"] = project.phases.all()
 
+        print('project_name:', project.name_proj)
+        print('phases:', project.phases.all())
         project_list.append(proj_dict)
     context = {
         'projects_list': project_list
@@ -89,6 +87,8 @@ def client_projects(request, client_id): # WORK IN PROGRESS
         proj_dict["start_date"] = project.start_date
         proj_dict["end_date"] = project.end_date
         proj_dict["phases"] = project.phases.all()
+        print('project_name:', project.name_proj)
+        print('phases:', project.phases.all() )
         project_list.append(proj_dict)
         # print('project:', project, '   phases:',proj_dict["phases"])
     # print('project_list:', project_list)
