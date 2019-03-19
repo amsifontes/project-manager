@@ -91,7 +91,7 @@ def client_projects(request, client_id):
     context = {
         'project_list': project_list
     }
-    print('phases:', project_list[1]['phases'])
+    # print('phases:', project_list[1]['phases'])
     return render(request, 'pages/client-projects.html', context)
 
 
