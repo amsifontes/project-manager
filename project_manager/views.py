@@ -68,6 +68,38 @@ def render_projects(request):
     }
     return render(request, 'pages/base-all-projects.html', context)
 
+def client_projects(request, client_id): # WORK IN PROGRESS
+    # projects = Project.client.filter(pk=client_id)
+    # SELECT 
+    #     *
+    # FROM
+    #     Projects_table
+    # JOIN 
+    #     Clients_table ON
+    #     Projects_table.client_id = Clients_table.client_id
+    # WHERE
+    #     Clients_table.client_id = client_id
+
+    projects = Project.objects.filter(client_id=client_id)
+    project_list = []
+    for project in projects:
+        proj_dict = dict()
+        proj_dict["project_name"] = project.name_proj
+        proj_dict["address"] = project.address
+        proj_dict["start_date"] = project.start_date
+        proj_dict["end_date"] = project.end_date
+        proj_dict["phases"] = project.phases.all()
+        project_list.append(proj_dict)
+        # print('project:', project, '   phases:',proj_dict["phases"])
+    # print('project_list:', project_list)
+    context = {
+        'project_list': project_list
+    }
+    # print('phases:', project_list[1]['phases'])
+    return render(request, 'pages/client-projects.html', context)
+
+
+
 def create_project(request):
     # process form data if POST request
     if request.method == 'POST':

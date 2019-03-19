@@ -1,0 +1,9 @@
+{% for project in project_list %}
+  <h3>{{ project.project_name }}</h3>
+ <ul>
+  {% for phase in phases %}
+    <li>{{phase.name_phase}} - Start Date: {{ phase.start_date }}  End Date: {{ phase.end_date }}</li>
+    {% endif %}
+  {% endfor %}
+  </ul>
+{% endfor %}
