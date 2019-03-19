@@ -47,6 +47,7 @@ class ProjectForm(forms.Form):
 # main project view - render all projects and related phases
 # can be re-used/refactored to render only related projects/phases
 def render_projects(request):
+	
     projects = Project.objects.all()
     phases = Phase.objects.all()
     project_list = []
@@ -63,6 +64,7 @@ def render_projects(request):
                 project_list.append(proj_dict)
 
         project_list.append(proj_dict)
+
     context = {
         'projects_list': project_list
     }
@@ -77,16 +79,14 @@ def create_project(request):
         # confirm form values are valid
         if form.is_valid():
             print("form.cleaned_data['architect']: ", form.cleaned_data['architect'])
-            Project.objects.create(
-                # architect = form.cleaned_data['architect'],
-                architect = Architect.objects.get(username=form.cleaned_data['architect']),
-                # client = form.cleaned_data['client'],
-                client = Client.objects.get(username=form.cleaned_data['client']),
+            project = Project.objects.create(
                 name_proj = form.cleaned_data['name_proj'],
                 address = form.cleaned_data['address'],
                 start_date = form.cleaned_data['start_date'],
                 end_date = form.cleaned_data['end_date'],
             )
+            project.clients.add(request.user)
+            project.architects.add(request.user)
             # messages.info(request, "New Project Created")
             return redirect('/projects/')
 
@@ -98,6 +98,7 @@ def create_project(request):
         # 'mesages': messages,
     }
     return render(request, 'pages/create-project.html', context)
+
 
 
 def update_project(request, project_id):

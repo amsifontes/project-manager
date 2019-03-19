@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # TODO: add `created` and `updated` fields to models
@@ -39,14 +40,14 @@ class Client(models.Model):
 
 class Project(models.Model):
     # id(pk)
-    architect = models.ForeignKey(
-        Architect,
-        on_delete=models.CASCADE,
-        # default="unassigned"
+    architects = models.ManyToManyField(
+        User,
+        related_name="architects",
     )
-    client = models.ForeignKey(
-        Client,
-        on_delete=models.CASCADE) # consider SET_NULL, requires field be nullable, to keep Project is Client is deleted
+    clients = models.ManyToManyField(
+        User,
+        related_name="clients",
+    )
     name_proj = models.CharField( # consider SlugField for use in shareable URL
         max_length=100,
         default="Unnamed Project"
