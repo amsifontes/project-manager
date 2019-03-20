@@ -5,6 +5,9 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
 
+# needed for admin honeypot path
+from django.conf.urls import url
+
 from project_manager import views as project_manager_views
 # hello, create_project, update_project, create_phase, update_phase
 
@@ -16,14 +19,17 @@ urlpatterns = [
     path("my-projects/<client_id>", project_manager_views.client_projects),
     path("create-project/", project_manager_views.create_project),
     path("update-project/<project_id>", project_manager_views.update_project),
-
+    # path("admin/", include('admin_honeypot.urls', namespace='admin_honeypot')),
+    url(r'^admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
+    # Django Admin, use {% url 'admin:index' %}
+    path(settings.ADMIN_URL, admin.site.urls),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
         name="about",
     ),
-    # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
+
+    
     # User management
     path(
         "users/",
