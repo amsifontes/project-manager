@@ -30,12 +30,14 @@ class ProjectForm(forms.Form):
     architect = forms.ChoiceField(
         required=True,
         widget=forms.RadioSelect, 
-        choices=architect_choices_tuple,
+        # choices=architect_choices_tuple,
+        choices=[(choice, choice.username) for choice in Architect.objects.all()],
         )
     client  = forms.ChoiceField(
         required=True,
         widget=forms.RadioSelect, 
-        choices=client_choices_tuple,
+        # choices=client_choices_tuple,
+        choices=[(choice, choice.username) for choice in Client.objects.all()],
         )
     name_proj  = forms.CharField(max_length=100)
     address  = forms.CharField(max_length=100)
