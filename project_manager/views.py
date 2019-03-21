@@ -5,20 +5,20 @@ from django import forms
 
 from .models import Architect, Client, Project, Phase
 
-architects = Architect.objects.all()
-# print(architects)
-architect_choices_list = []
-for architect in architects:
-    architect_option = (architect, architect.username)
-    architect_choices_list.append(architect_option)
-architect_choices_tuple = tuple(architect_choices_list)
+# architects = Architect.objects.all()
+# # print(architects)
+# architect_choices_list = []
+# for architect in architects:
+#     architect_option = (architect, architect.username)
+#     architect_choices_list.append(architect_option)
+# architect_choices_tuple = tuple(architect_choices_list)
 
-clients = Client.objects.all()
-client_choices_list = []
-for client in clients:
-    client_option = (client, client.username)
-    client_choices_list.append(client_option)
-client_choices_tuple = tuple(client_choices_list)
+# clients = Client.objects.all()
+# client_choices_list = []
+# for client in clients:
+#     client_option = (client, client.username)
+#     client_choices_list.append(client_option)
+# client_choices_tuple = tuple(client_choices_list)
 
 # (
 #     ('1', 'Architect option 1'),
