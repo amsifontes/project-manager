@@ -1,7 +1,7 @@
 from .base import *  # noqa
 from .base import env
 
-import django_heroku
+# import django_heroku
 
 # GENERAL
 # ------------------------------------------------------------------------------
@@ -138,4 +138,4 @@ LOGGING = {
 
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
