@@ -1,6 +1,8 @@
 from .base import *  # noqa
 from .base import env
 
+# import django_heroku
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -136,3 +138,4 @@ LOGGING = {
 
 
 
+# django_heroku.settings(locals())
