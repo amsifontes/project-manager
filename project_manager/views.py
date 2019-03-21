@@ -27,18 +27,24 @@ from .models import Architect, Client, Project, Phase
 
 #forms as classes
 class ProjectForm(forms.Form):
-    architect = forms.ChoiceField(
-        required=True,
-        widget=forms.RadioSelect, 
-        # choices=architect_choices_tuple,
-        choices=[(choice, choice.username) for choice in Architect.objects.all()],
-        )
-    client  = forms.ChoiceField(
-        required=True,
-        widget=forms.RadioSelect, 
-        # choices=client_choices_tuple,
-        choices=[(choice, choice.username) for choice in Client.objects.all()],
-        )
+    # architect = forms.ChoiceField(
+    #     required=True,
+    #     widget=forms.RadioSelect, 
+    #     # choices=architect_choices_tuple,
+    #     choices=[(choice, choice.username) for choice in Architect.objects.all()],
+    #     )
+
+    architect = forms.ModelChoiceField(queryset=Architect.objects.all())
+    
+    # client  = forms.ChoiceField(
+    #     required=True,
+    #     widget=forms.RadioSelect, 
+    #     # choices=client_choices_tuple,
+    #     choices=[(choice, choice.username) for choice in Client.objects.all()],
+    #     )
+
+    client = forms.ModelChoiceField(queryset=Client.objects.all())
+
     name_proj  = forms.CharField(max_length=100)
     address  = forms.CharField(max_length=100)
     start_date  = forms.DateField(widget=forms.SelectDateWidget)
