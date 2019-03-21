@@ -46,7 +46,9 @@ class Project(models.Model):
     )
     client = models.ForeignKey(
         Client,
-        on_delete=models.CASCADE) # consider SET_NULL, requires field be nullable, to keep Project is Client is deleted
+        on_delete=models.CASCADE,
+        # related_name='clients'  # is this necessary for lookup of Projects by client_id?
+        ) # consider SET_NULL, requires field be nullable, to keep Project is Client is deleted
     name_proj = models.CharField( # consider SlugField for use in shareable URL
         max_length=100,
         default="Unnamed Project"

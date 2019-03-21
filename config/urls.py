@@ -13,7 +13,8 @@ urlpatterns = [
     # path('', views.homepage, name="home"),
     
     path("projects/", project_manager_views.render_projects),
-    path("create-project/", project_manager_views.create_project),
+    path("my-projects/<client_id>", project_manager_views.client_projects),
+    path("create-project/", project_manager_views.create_project, name="create_project"),
     path("update-project/<project_id>", project_manager_views.update_project),
 
     path(
