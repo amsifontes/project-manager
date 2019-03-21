@@ -1,6 +1,8 @@
 from .base import *  # noqa
 from .base import env
 
+import django_heroku
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
@@ -62,3 +64,4 @@ INSTALLED_APPS += ['django_extensions']  # noqa F405
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+django_heroku.settings(locals())

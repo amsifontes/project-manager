@@ -4,6 +4,8 @@
 from .base import *  # noqa
 from .base import env
 
+import django_heroku
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
@@ -109,3 +111,4 @@ ACCOUNT_EMAIL_REQUIRED = False
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = None
 
+django_heroku.settings(locals())
