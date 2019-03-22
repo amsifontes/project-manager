@@ -229,7 +229,7 @@
             <address>Address: <em>{{ project.address }}</em></address>
             <p>Start Date: <em>{{ project.start_date }}</em></p>
             <p>End Date: <em>{{ project.end_date }}</em></p>
-            <p>Client: <em>{{ project.client }}</em></p>
+            {% comment %} <p>Client: <em>{{ project.client }}</em></p> {% endcomment %}
             <h2>Phases:</h2>
             <ol>
             {% for phase in project.phases %}

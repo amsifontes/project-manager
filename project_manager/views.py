@@ -116,7 +116,7 @@ def create_project(request):
         # TODO: validate address with LOB API HERE
         # confirm form values are valid
         if form.is_valid():
-            print("form.cleaned_data['architect']: ", form.cleaned_data['architect'])
+            # print("form.cleaned_data['architect']: ", form.cleaned_data['architect'])
             Project.objects.create(
                 # architect = form.cleaned_data['architect'],
                 architect = Architect.objects.get(username=form.cleaned_data['architect']),
