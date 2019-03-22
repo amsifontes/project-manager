@@ -222,10 +222,9 @@
           <div class="row">
 
             <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
+            <div class="" style="padding: 1.5em 3em;">
 
             {% for project in projects_list %}
-            <li>
             <h2>Name of project: <em>{{ project.project_name }}</em></h2>
             <address>Address: <em>{{ project.address }}</em></address>
             <p>Start Date: <em>{{ project.start_date }}</em></p>
@@ -236,10 +235,10 @@
             {% for phase in project.phases %}
               <li>
               <p>Name of phase: <em>{{ phase.name_phase }}</em></p>
-              <p>Project: <em>{{ phase.project }}</em></p>
+              {% comment %} <p>Project: <em>{{ phase.project }}</em></p> {% endcomment %}
               <p>Start Date: <em>{{ phase.start_date }}</em></p>
-              <p>End Date: <em>{{ phase.end_date }}</em></p>
-              <p>Client: <em>{{ phase.client }}</em></p
+              <p>End Date: <em>{{ phase.end_date }}</p>
+              {% comment %} <p>Client: <em>{{ phase.client }}</em></p> {% endcomment %}
               </li>
             {% endfor %}
             </ol>
