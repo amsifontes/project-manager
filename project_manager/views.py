@@ -47,7 +47,11 @@ class ProjectForm(forms.Form):
 # main project view - render all projects and related phases
 # can be re-used/refactored to render only related projects/phases
 def render_projects(request):
-    projects = Project.objects.all()
+    # projects = Project.objects.all()
+    if str(request.user) == 'lisa':
+        projects = Project.objects.all()
+    else:
+        projects = Project.objects.filter(client_id=request.user.id)
     project_list = []
     for project in projects:
         proj_dict = dict()
@@ -77,8 +81,12 @@ def client_projects(request, client_id): # WORK IN PROGRESS
     #     Projects_table.client_id = Clients_table.client_id
     # WHERE
     #     Clients_table.client_id = client_id
+    
 
-    projects = Project.objects.filter(client_id=client_id)
+    projects = Project.objects.filter(client_id=request.user.id)
+    print('----------------')
+    print(request.user)
+    print('----------------')
     project_list = []
     for project in projects:
         proj_dict = dict()
