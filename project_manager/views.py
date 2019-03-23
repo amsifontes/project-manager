@@ -45,7 +45,7 @@ class ProjectForm(forms.Form):
     #     )
     
 #     changed from 'client' to 'assign_a_client'
-    client = forms.ModelChoiceField(queryset=Client.objects.all())
+    assign_a_client = forms.ModelChoiceField(queryset=Client.objects.all())
 
 #     changed from 'name_proj' to 'project_name'
     project_name  = forms.CharField(max_length=100)
@@ -130,13 +130,16 @@ def create_project(request):
         # confirm form values are valid
         if form.is_valid():
             # print("form.cleaned_data['architect']: ", form.cleaned_data['architect'])
+            print('form.cleaned_data: ', form.cleaned_data),
             Project.objects.create(
                 # architect = form.cleaned_data['architect'],
-                architect = Architect.objects.get(username=form.cleaned_data['architect']),
+                # architect = Architect.objects.get(username=form.cleaned_data['architect']),
+                architect = form.cleaned_data['assign_an_architect'],
                 # client = form.cleaned_data['client'],
-                client = Client.objects.get(username=form.cleaned_data['client']),
-                name_proj = form.cleaned_data['name_proj'],
-                address = form.cleaned_data['address'],
+                # client = Client.objects.get(username=form.cleaned_data['client']),
+                client = form.cleaned_data['assign_a_client'],
+                name_proj = form.cleaned_data['project_name'],
+                address = form.cleaned_data['project_address'],
                 start_date = form.cleaned_data['start_date'],
                 end_date = form.cleaned_data['end_date'],
             )
