@@ -34,7 +34,8 @@ class ProjectForm(forms.Form):
     #     choices=[(choice, choice.username) for choice in Architect.objects.all()],
     #     )
 
-    architect = forms.ModelChoiceField(queryset=Architect.objects.all())
+#     changed from 'architect' to 'assign_an_architect'
+    assign_an_architect = forms.ModelChoiceField(queryset=Architect.objects.all())
     
     # client  = forms.ChoiceField(
     #     required=True,
@@ -42,11 +43,15 @@ class ProjectForm(forms.Form):
     #     # choices=client_choices_tuple,
     #     choices=[(choice, choice.username) for choice in Client.objects.all()],
     #     )
-
+    
+#     changed from 'client' to 'assign_a_client'
     client = forms.ModelChoiceField(queryset=Client.objects.all())
 
-    name_proj  = forms.CharField(max_length=100)
-    address  = forms.CharField(max_length=100)
+#     changed from 'name_proj' to 'project_name'
+    project_name  = forms.CharField(max_length=100)
+#     changed from 'address' to 'project_address'
+    project_address  = forms.CharField(max_length=100)
+
     start_date  = forms.DateField(widget=forms.SelectDateWidget)
     end_date  = forms.DateField(widget=forms.SelectDateWidget)
 
@@ -55,7 +60,11 @@ class ProjectForm(forms.Form):
 # main project view - render all projects and related phases
 # can be re-used/refactored to render only related projects/phases
 def render_projects(request):
-    projects = Project.objects.all()
+    # projects = Project.objects.all()
+    if str(request.user) == 'lisa':
+        projects = Project.objects.all()
+    else:
+        projects = Project.objects.filter(client_id=request.user.id)
     project_list = []
     for project in projects:
         proj_dict = dict()
@@ -85,8 +94,12 @@ def client_projects(request, client_id): # WORK IN PROGRESS
     #     Projects_table.client_id = Clients_table.client_id
     # WHERE
     #     Clients_table.client_id = client_id
+    
 
-    projects = Project.objects.filter(client_id=client_id)
+    projects = Project.objects.filter(client_id=request.user.id)
+    print('----------------')
+    print(request.user)
+    print('----------------')
     project_list = []
     for project in projects:
         proj_dict = dict()
@@ -116,7 +129,7 @@ def create_project(request):
         # TODO: validate address with LOB API HERE
         # confirm form values are valid
         if form.is_valid():
-            print("form.cleaned_data['architect']: ", form.cleaned_data['architect'])
+            # print("form.cleaned_data['architect']: ", form.cleaned_data['architect'])
             Project.objects.create(
                 # architect = form.cleaned_data['architect'],
                 architect = Architect.objects.get(username=form.cleaned_data['architect']),
