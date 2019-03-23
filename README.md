@@ -18,6 +18,7 @@ python manage.py runserver
 ```
 
 You should see the below homepage in the browser:
+![Screenshot of Homepage](/readme_images/01_homepage.png)
 
 
 
