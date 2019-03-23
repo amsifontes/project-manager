@@ -202,7 +202,7 @@
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Add Project</a>
+            <a href="/create-project/" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Add Project</a>
           </div>
 
             
@@ -222,24 +222,23 @@
           <div class="row">
 
             <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
+            <div class="" style="padding: 1.5em 3em;">
 
             {% for project in projects_list %}
-            <li>
             <h2>Name of project: <em>{{ project.project_name }}</em></h2>
             <address>Address: <em>{{ project.address }}</em></address>
             <p>Start Date: <em>{{ project.start_date }}</em></p>
             <p>End Date: <em>{{ project.end_date }}</em></p>
-            <p>Client: <em>{{ project.client }}</em></p>
+            {% comment %} <p>Client: <em>{{ project.client }}</em></p> {% endcomment %}
             <h2>Phases:</h2>
             <ol>
             {% for phase in project.phases %}
               <li>
               <p>Name of phase: <em>{{ phase.name_phase }}</em></p>
-              <p>Project: <em>{{ phase.project }}</em></p>
+              {% comment %} <p>Project: <em>{{ phase.project }}</em></p> {% endcomment %}
               <p>Start Date: <em>{{ phase.start_date }}</em></p>
-              <p>End Date: <em>{{ phase.end_date }}</em></p>
-              <p>Client: <em>{{ phase.client }}</em></p
+              <p>End Date: <em>{{ phase.end_date }}</p>
+              {% comment %} <p>Client: <em>{{ phase.client }}</em></p> {% endcomment %}
               </li>
             {% endfor %}
             </ol>
