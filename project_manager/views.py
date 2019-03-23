@@ -5,20 +5,20 @@ from django import forms
 
 from .models import Architect, Client, Project, Phase
 
-architects = Architect.objects.all()
-# print(architects)
-architect_choices_list = []
-for architect in architects:
-    architect_option = (architect, architect.username)
-    architect_choices_list.append(architect_option)
-architect_choices_tuple = tuple(architect_choices_list)
+# architects = Architect.objects.all()
+# # print(architects)
+# architect_choices_list = []
+# for architect in architects:
+#     architect_option = (architect, architect.username)
+#     architect_choices_list.append(architect_option)
+# architect_choices_tuple = tuple(architect_choices_list)
 
-clients = Client.objects.all()
-client_choices_list = []
-for client in clients:
-    client_option = (client, client.username)
-    client_choices_list.append(client_option)
-client_choices_tuple = tuple(client_choices_list)
+# clients = Client.objects.all()
+# client_choices_list = []
+# for client in clients:
+#     client_option = (client, client.username)
+#     client_choices_list.append(client_option)
+# client_choices_tuple = tuple(client_choices_list)
 
 # (
 #     ('1', 'Architect option 1'),
@@ -27,18 +27,31 @@ client_choices_tuple = tuple(client_choices_list)
 
 #forms as classes
 class ProjectForm(forms.Form):
-    assign_an_architect = forms.ChoiceField(
-        required=True,
-        widget=forms.RadioSelect, 
-        choices=architect_choices_tuple,
-        )
-    assign_a_client  = forms.ChoiceField(
-        required=True,
-        widget=forms.RadioSelect, 
-        choices=client_choices_tuple,
-        )
+    # architect = forms.ChoiceField(
+    #     required=True,
+    #     widget=forms.RadioSelect, 
+    #     # choices=architect_choices_tuple,
+    #     choices=[(choice, choice.username) for choice in Architect.objects.all()],
+    #     )
+
+#     changed from 'architect' to 'assign_an_architect'
+    assign_an_architect = forms.ModelChoiceField(queryset=Architect.objects.all())
+    
+    # client  = forms.ChoiceField(
+    #     required=True,
+    #     widget=forms.RadioSelect, 
+    #     # choices=client_choices_tuple,
+    #     choices=[(choice, choice.username) for choice in Client.objects.all()],
+    #     )
+    
+#     changed from 'client' to 'assign_a_client'
+    client = forms.ModelChoiceField(queryset=Client.objects.all())
+
+#     changed from 'name_proj' to 'project_name'
     project_name  = forms.CharField(max_length=100)
+#     changed from 'address' to 'project_address'
     project_address  = forms.CharField(max_length=100)
+
     start_date  = forms.DateField(widget=forms.SelectDateWidget)
     end_date  = forms.DateField(widget=forms.SelectDateWidget)
 
