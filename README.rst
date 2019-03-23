@@ -5,7 +5,6 @@ Gantt chart providing status transparency to various stakeholders
 
 **Relevant filepaths:**
 
-
 * "urls.py": /homergantt/config/urls.py
 
 * "views.py": /homergantt/project_manager/views.py
