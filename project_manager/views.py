@@ -27,18 +27,18 @@ client_choices_tuple = tuple(client_choices_list)
 
 #forms as classes
 class ProjectForm(forms.Form):
-    architect = forms.ChoiceField(
+    assign_an_architect = forms.ChoiceField(
         required=True,
         widget=forms.RadioSelect, 
         choices=architect_choices_tuple,
         )
-    client  = forms.ChoiceField(
+    assign_a_client  = forms.ChoiceField(
         required=True,
         widget=forms.RadioSelect, 
         choices=client_choices_tuple,
         )
-    name_proj  = forms.CharField(max_length=100)
-    address  = forms.CharField(max_length=100)
+    project_name  = forms.CharField(max_length=100)
+    project_address  = forms.CharField(max_length=100)
     start_date  = forms.DateField(widget=forms.SelectDateWidget)
     end_date  = forms.DateField(widget=forms.SelectDateWidget)
 

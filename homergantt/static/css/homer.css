@@ -12020,3 +12020,7 @@ body {
 .navbar a, .site-home p, .site-home li  {color: white; }
 
 /* .navbar a:hover {color: #ffdf85; border: dotted 1px #ffdf85;} */
+
+.create-project-div-form {
+  padding: 1.5em 3em;
+}
