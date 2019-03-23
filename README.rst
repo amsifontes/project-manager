@@ -3,8 +3,8 @@ HomerGantt
 
 Gantt chart providing status transparency to various stakeholders
 
-Relevant filepaths:
-^^^^^^^^^^^^^^^^^^^
+**Relevant filepaths:**
+
 
 * "urls.py": /homergantt/config/urls.py
 
