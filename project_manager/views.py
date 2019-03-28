@@ -84,23 +84,8 @@ def render_projects(request):
     }
     return render(request, 'pages/base-all-projects.html', context)
 
-def client_projects(request, client_id): # WORK IN PROGRESS
-    # projects = Project.client.filter(pk=client_id)
-    # SELECT 
-    #     *
-    # FROM
-    #     Projects_table
-    # JOIN 
-    #     Clients_table ON
-    #     Projects_table.client_id = Clients_table.client_id
-    # WHERE
-    #     Clients_table.client_id = client_id
-    
-
+def client_projects(request, client_id):
     projects = Project.objects.filter(client_id=request.user.id)
-    print('----------------')
-    print(request.user)
-    print('----------------')
     project_list = []
     for project in projects:
         proj_dict = dict()
@@ -109,11 +94,7 @@ def client_projects(request, client_id): # WORK IN PROGRESS
         proj_dict["start_date"] = project.start_date
         proj_dict["end_date"] = project.end_date
         proj_dict["phases"] = project.phases.all()
-        print('project_name:', project.name_proj)
-        print('phases:', project.phases.all() )
         project_list.append(proj_dict)
-        # print('project:', project, '   phases:',proj_dict["phases"])
-    # print('project_list:', project_list)
     context = {
         'project_list': project_list
     }
